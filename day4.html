@@ -1,0 +1,115 @@
+<html>
+<head>
+  <title></title>
+  <script src="http://code.jquery.com/jquery.min.js"></script>
+  <link href="http://maxcdn.bootstrapcdn.com/bootstrap/3.2.0/css/bootstrap.min.css" rel="stylesheet" type="text/css" />
+  <script src="http://maxcdn.bootstrapcdn.com/bootstrap/3.2.0/js/bootstrap.min.js"></script>
+  <script src="https://google-code-prettify.googlecode.com/svn/loader/run_prettify.js"></script>
+  <link rel="stylesheet" href="screens.css">
+</head>
+<body>
+  <div class="container">
+    <div class="row">
+      <div class="col-md-8 col-md-offset-2">
+        <h1>Day 4</h1>
+
+        <p>Today we reviewed forms, learned how to process forms in Rails and started using CSS and Boostrap in Rails.</p>
+
+        <div>
+          <h2>Processing forms in Rails</h2>
+          <iframe src="http://player.vimeo.com/video/109342646" width="700" height="440" frameborder="0" webkitallowfullscreen mozallowfullscreen allowfullscreen></iframe>
+
+          <p>To process a form, we need to first send it to an another URL. We can do this with an <code>action</code> attribute:</p>
+
+          <pre class="prettyprint">
+<form action="/process_form">
+  <label for="first_name">First name:</label>
+  <input id="first_name" name="first_name" type="text"></br>
+  <input type="submit">
+</form></pre>
+          <p>Now this <code>/process_form</code> URL needs to be supported in our routes file, or we'll get an error. Let's create a route for this URL:</p>
+          <pre class="prettyprint">
+get "/process_form" => "application#proces_form"</pre>
+
+          <p>Like we learned before, the second part of the route, <code>application#proces_form</code> contains two parts separated by a hashtag. The first part, <code>application</code>, refers to the <strong>controller</strong> and the second part, <code>process_form</code>, refers to the <strong>action</strong>.</p>
+
+          <p>We also need to create an HTML file with the same name as the route's action. The difference in this case is we're creating an HTML file that includes Ruby, not just a regular HTML file. We do this by adding <code>.erb</code> to the end of the file when we create it. In this case, we'll create a file inside the views > application folder called <code>process_form.html.erb</code></p>
+
+          <p>Inside this file, we'll create an h1 tag that looks like this:</p>
+
+          <pre class="prettyprint">
+<h1>Your name is <%= params['first_name'] %></h1></pre>
+
+          <p>The <code><%= %></code> tags are called <strong>ERB</strong> tags. They let us embed Ruby inside HTML files. Anything we type between those tags is read as Ruby code. The command <code>params['first_name']</code> pulls out the one piece of info that we sent in the form, a first name. We know it's called 'first_name' because that's what we called it in the <em>name</em> attribute of the only input element in the form. In case you forgot, it looked like this:</p>
+
+          <pre class="prettyprint">
+<input id="first_name" name="first_name" type="text"></pre>
+
+          <p>Now, when we type a name into the form, it gets displayed on the next page!</p>
+
+          <p>There were several steps we took to get to this point:</p>
+          <ol>
+            <li>Create a form inside an HTML page</li>
+            <li>Point the form to another URL using an "action" attribute</li>
+            <li>Give each input in the form a "name" attribute</li>
+            <li>Create another route to support the URL in the form's "action" attribute</li>
+            <li>Create a page that matches the route's action and give it an ERB extention</li>
+            <li>Add a <code>params['name']</code> for each input you want to display from your form. The 'name' comes from the name attribute in your form's input elements.</li>
+          </ol>
+
+
+        </div>
+        <div>
+          <h2>Bootstrap and CSS in Rails</h2>
+          <iframe src="http://player.vimeo.com/video/109342645" width="700" height="440" frameborder="0" webkitallowfullscreen mozallowfullscreen allowfullscreen></iframe>
+
+          <p>To import Boostrap we need to first access the master HTML page in our Rails app. It's located in app > views > layouts > application.html.erb. This application layout file contains the missing head and body tags that we didn't see in our views. </p>
+
+          <p>Copy in the following lines:</p>
+
+          <pre class="prettyprint">
+<script src="//code.jquery.com/jquery.min.js"></script>
+<link href="//maxcdn.bootstrapcdn.com/bootstrap/3.2.0/css/bootstrap.min.css" rel="stylesheet" type="text/css" />
+<script src="//maxcdn.bootstrapcdn.com/bootstrap/3.2.0/js/bootstrap.min.js"></script></pre>
+
+          <p>and paste them <em>above</em> <code>stylesheet_link_tag</code>, so it should look something like this:</p>
+
+          <pre class="prettyprint">
+<script src="//code.jquery.com/jquery.min.js"></script>
+<link href="//maxcdn.bootstrapcdn.com/bootstrap/3.2.0/css/bootstrap.min.css" rel="stylesheet" type="text/css" />
+<script src="//maxcdn.bootstrapcdn.com/bootstrap/3.2.0/js/bootstrap.min.js"></script>
+
+
+<%= stylesheet_link_tag    'application', media: 'all', 'data-turbolinks-track' => true %>
+<%= javascript_include_tag 'application', 'data-turbolinks-track' => true %>
+<%= csrf_meta_tags %></pre>
+
+          <p>Now, we should be able to use Bootstrap classes throughout the entire application.</p>
+
+          <p>The stylesheet_link_tag pulls in all the custom CSS we might have written for this Rails app. We need to import the Bootstrap code before so our custom CSS overrides Bootstrap if we need it to. We can add in custom CSS in the app > assets > stylesheets > application.css file. <strong>But make sure you write your CSS at the bottom of the file</strong>. The commented out code is actually important for the Rails application and we need to leave it in.</p>
+        </div>
+
+        <h2>Mad-libs example</h2>
+        <iframe src="http://player.vimeo.com/video/109342647" width="700" height="440" frameborder="0" webkitallowfullscreen mozallowfullscreen allowfullscreen></iframe>
+        <p>This example shows you how to process multiple form inputs. Use this example as notes to create your own mad-lib.</p>
+      </div>
+    </div>
+  </div>
+  <footer></footer>
+  <script>
+String.prototype.escapeHTML = function () {
+  return(
+    this.replace(/>/g,'&gt;').
+         replace(/</g,'&lt;').
+         replace(/"/g,'&quot;')
+  );
+};
+var elems = document.getElementsByTagName('pre');
+for (i=0; i<elems.length;i++) {
+  if (elems[i]) {
+    elems[i].innerHTML = elems[i].innerHTML.escapeHTML();
+  }
+}
+  </script>
+</body>
+</html>
