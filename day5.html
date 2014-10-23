@@ -1,0 +1,76 @@
+<html>
+<head>
+  <title></title>
+  <script src="http://code.jquery.com/jquery.min.js"></script>
+  <link href="http://maxcdn.bootstrapcdn.com/bootstrap/3.2.0/css/bootstrap.min.css" rel="stylesheet" type="text/css" />
+  <script src="http://maxcdn.bootstrapcdn.com/bootstrap/3.2.0/js/bootstrap.min.js"></script>
+  <script src="https://google-code-prettify.googlecode.com/svn/loader/run_prettify.js"></script>
+  <link rel="stylesheet" href="screens.css">
+</head>
+<body>
+  <div class="container">
+    <div class="row">
+      <div class="col-md-8 col-md-offset-2">
+        <h1>Day 5 <small><a href="index.html">back to index</a></small></h1>
+
+        <p>Today we reviewed form processing and fleshed out our mad-libs.</p>
+
+        <div>
+          <h2>Homework</h2>
+          <p>Since we weren't able to get to conditional logic in class, watch and type along with the video below. I've included some notes to help you along the way. You'll need to either create a new app called "logic" or start with what we had by the end of class yesterday.</p>
+
+          <iframe src="http://player.vimeo.com/video/109646325" width="700" height="440" frameborder="0" webkitallowfullscreen mozallowfullscreen allowfullscreen></iframe>
+
+          <p><strong>Variables</strong> are containers that hold information. In Ruby they get represented as a single, connected word that starts with a lowercase letter. We can store information in variables with the <code>=</code> sign.</p>
+
+          <pre class="prettyprint">
+number = 15</pre>
+
+          <p>The code snippet above saves the value 15 into the variable <code>number</code>. Now we can use the variable <code>number</code> any place we would have used an actual number. For example, we can now do things like:</p>
+
+          <pre class="prettyprint">
+puts number + 3</pre>
+
+          <p>and we get 18 as the result. This only works because we assigned 15 to the variable <code>number</code></p>
+
+          <p>If we want to create a variable in a Rails controller and send it down to the view, we need to put an <code>@</code> sign at the beginning of the variable. This makes it an <strong>instance variable</strong> that can move down to the view from the controller:</p>
+
+          <pre class="prettyprint">
+@number = 15</pre>
+
+          <p>We can use <code>if-else</code> statements to have our program make decisions. For example if we wanted the program to print "Yay!" if a variable contains "Cubs" and "Booooo" if a variable contains "Sox":</p>
+
+          <pre class="prettyprint">
+team = "Cubs"
+if team == "Cubs"
+  puts "Yay!"
+else
+  puts "Booooo"
+end</pre>
+
+          <p>There are a few things we need to talk about here. The first line just assigns the string "Cubs" into the variable <code>team</code>. The second line does two things. It first uses the <code>==</code> sign to check if <code>team</code> is the same as <code>"Cubs"</code>. Notice that we're using the double-equals sign here, not the single-equals sign. Since variable team contains the string "Cubs", we know that <code>team</code> is the same as <code>"Cubs"</code>. Based on whether this statement is true or false, the code either runs the third line or the fifth line.</p>
+
+          <p>Please email me if you get stuck for more than 10 minutes, and make sure you're able to build the app from the video before class next Monday.</p>
+        </div>
+
+      </div>
+    </div>
+  </div>
+  <footer></footer>
+  <script>
+String.prototype.escapeHTML = function () {
+  return(
+    this.replace(/>/g,'&gt;').
+         replace(/</g,'&lt;').
+         replace(/"/g,'&quot;')
+  );
+};
+var elems = document.getElementsByTagName('pre');
+for (i=0; i<elems.length;i++) {
+  if (elems[i]) {
+    elems[i].innerHTML = elems[i].innerHTML.escapeHTML();
+  }
+}
+  </script>
+</body>
+</html>
