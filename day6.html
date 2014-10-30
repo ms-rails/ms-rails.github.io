@@ -1,0 +1,69 @@
+<html>
+<head>
+  <title></title>
+  <script src="http://code.jquery.com/jquery.min.js"></script>
+  <link href="http://maxcdn.bootstrapcdn.com/bootstrap/3.2.0/css/bootstrap.min.css" rel="stylesheet" type="text/css" />
+  <script src="http://maxcdn.bootstrapcdn.com/bootstrap/3.2.0/js/bootstrap.min.js"></script>
+  <script src="https://google-code-prettify.googlecode.com/svn/loader/run_prettify.js"></script>
+  <link rel="stylesheet" href="screens.css">
+</head>
+<body>
+  <div class="container">
+    <div class="row">
+      <div class="col-md-8 col-md-offset-2">
+        <h1>Day 6 <small><a href="index.html">back to index</a></small></h1>
+
+        <p>Today we worked on conditional logic apps</p>
+
+        <div>
+          <h2>Homework</h2>
+          <p>For next week we'll start working with cookies. Watch and type along with the video below. I've included some notes to help you along the way.</p>
+
+          <iframe src="http://player.vimeo.com/video/110438885" width="700" height="440" frameborder="0" webkitallowfullscreen mozallowfullscreen allowfullscreen></iframe>
+
+          <p>We can use <strong>cookies</strong> to temporarily store information in web apps. Cookies work kind of like the params hash. Suppose we wanted a cookie to hold a user's name. We could set it in the controller with:</p>
+
+          <pre class="prettyprint">
+cookies['name'] = "Arjun"</pre>
+
+          <p>Now, the cookie should be stored in the browser. We can access the cookie with:</p>
+
+          <pre class="prettyprint">
+cookies['name']</pre>
+
+          <p>just like we would access something in the params hash. The key inside the <code>[ ]</code> can be any string we want. For example, if we wanted to set a user's birthday, we could use:</p>
+
+          <pre class="prettyprint">
+cookies['birthday'] = "1/25/86"</pre>
+
+          <p>If we wanted to set a cookie with a value from the params hash, we could use:</p>
+
+          <pre class="prettyprint">
+cookies['name'] = params['name']</pre>
+
+          <p>Sign-in is just the beginning of what we'll be able to eventually do with cookies.</p>
+
+          <p>Please email me if you get stuck for more than 10 minutes, and make sure you're able to build the app from the video before our next class.</p>
+        </div>
+
+      </div>
+    </div>
+  </div>
+  <footer></footer>
+  <script>
+String.prototype.escapeHTML = function () {
+  return(
+    this.replace(/>/g,'&gt;').
+         replace(/</g,'&lt;').
+         replace(/"/g,'&quot;')
+  );
+};
+var elems = document.getElementsByTagName('pre');
+for (i=0; i<elems.length;i++) {
+  if (elems[i]) {
+    elems[i].innerHTML = elems[i].innerHTML.escapeHTML();
+  }
+}
+  </script>
+</body>
+</html>
