@@ -1,0 +1,73 @@
+<html>
+<head>
+  <title></title>
+  <script src="http://code.jquery.com/jquery.min.js"></script>
+  <link href="http://maxcdn.bootstrapcdn.com/bootstrap/3.2.0/css/bootstrap.min.css" rel="stylesheet" type="text/css" />
+  <script src="http://maxcdn.bootstrapcdn.com/bootstrap/3.2.0/js/bootstrap.min.js"></script>
+  <script src="https://google-code-prettify.googlecode.com/svn/loader/run_prettify.js"></script>
+  <link rel="stylesheet" href="screens.css">
+</head>
+<body>
+  <div class="container">
+    <div class="row">
+      <div class="col-md-8 col-md-offset-2">
+        <h1>Day 7 <small><a href="index.html">back to index</a></small></h1>
+
+        <p>Today we worked on creating apps with cookies</p>
+
+        <div>
+          <h2>Homework</h2>
+          <p>For next week we'll keep working with counters. Watch and type along with the video below. I've included some notes to help you along the way.</p>
+
+          <iframe src="http://player.vimeo.com/video/111071622" width="700" height="440" frameborder="0" webkitallowfullscreen mozallowfullscreen allowfullscreen></iframe>
+
+          <p>We can use <strong>counters</strong> to keep track of information in web apps. A counter is just a variable that holds a changing number. We usually start counters off at 0:</p>
+
+          <pre class="prettyprint">
+counter = 0</pre>
+
+          <p>We called the variable <code>counter</code>, but we could have called it anything. We can add 1 to the counter by using this syntax:</p>
+
+          <pre class="prettyprint">
+counter = counter + 1</pre>
+
+          <p>It might seem weird, but the above line is just saying "Take what's in counter, add 1 to it, then save the result back into counter.</p>
+
+          <p>We can use the same basic syntax inside of a rails app. Suppose we were using a cookie to keep track of numbers coming from the params hash:</p>
+
+          <pre class="prettyprint">
+cookies["counter"] = cookies["counter"].to_f + params["number"].to_f</pre>
+
+          <p>We just substitued the cookie for the variable and converted the params hash value into a number. This won't work if <code>cookies["counter"]</code> doesn't exist yet, though. We need to make sure the we just set it to <code>params["number"].to_f</code> then:</p>
+
+          <pre class="prettyprint">
+if cookies["counter"]
+  cookies["counter"] = cookies["counter"].to_f + params["number"].to_f
+else
+  cookies["counter"] = params["number"].to_f
+end</pre>
+
+          <p>Please email me if you get stuck for more than 10 minutes, and make sure you're able to build the app from the video before our next class.</p>
+        </div>
+
+      </div>
+    </div>
+  </div>
+  <footer></footer>
+  <script>
+String.prototype.escapeHTML = function () {
+  return(
+    this.replace(/>/g,'&gt;').
+         replace(/</g,'&lt;').
+         replace(/"/g,'&quot;')
+  );
+};
+var elems = document.getElementsByTagName('pre');
+for (i=0; i<elems.length;i++) {
+  if (elems[i]) {
+    elems[i].innerHTML = elems[i].innerHTML.escapeHTML();
+  }
+}
+  </script>
+</body>
+</html>
