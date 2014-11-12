@@ -15,3 +15,15 @@ iframe {
 p {
   font-size: 1.2em;
 }
+
+pre {
+  font-size: 1.3em;
+
+}
+
+pre.prettyprint {
+  padding: 0.5em;
+  color: blue;
+  opacity: 0.7;
+
+}

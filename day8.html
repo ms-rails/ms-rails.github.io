@@ -1,0 +1,170 @@
+<html>
+<head>
+  <title></title>
+  <script src="http://code.jquery.com/jquery.min.js"></script>
+  <link href="http://maxcdn.bootstrapcdn.com/bootstrap/3.2.0/css/bootstrap.min.css" rel="stylesheet" type="text/css" />
+  <script src="http://maxcdn.bootstrapcdn.com/bootstrap/3.2.0/js/bootstrap.min.js"></script>
+  <script src="https://google-code-prettify.googlecode.com/svn/loader/run_prettify.js"></script>
+  <link rel="stylesheet" href="screens.css">
+</head>
+<body>
+  <div class="container">
+    <div class="row">
+      <div class="col-md-8 col-md-offset-2">
+        <h1>Day 8 <small><a href="index.html">back to index</a></small></h1>
+
+        <iframe src="http://player.vimeo.com/video/111677453" width="700" height="440" frameborder="0" webkitallowfullscreen mozallowfullscreen allowfullscreen></iframe>
+
+        <p>Today we worked on creating virtual pets using counters and query-strings. Query-string are a way to get information into the params hash without using forms. Here's an example URL with a query string from today:</p>
+
+        <pre class="prettyprint">
+/process_action?act=feed</pre>
+
+        <p>The <strong>query string</strong> starts at the <code>?</code>. It contains pieces of information called <strong>key-value pairs</strong> This above query string has one key-value pair, <code>act=feed</code>. The key is <em>act</em> and the value is <em>feed</em>. It's really similar to how the name attribute works in the input element of a form. The name attribute is the key and whatever you type in to the input field is the value. In this case, we're not sending the information through a form, but embedding it directly at the end of a link.</p>
+
+        <p>We could also add multiple key-value pairs to a query string by separating them with <code>&</code> symbols:</p>
+
+        <pre class="prettyprint">
+/process_action?act=feed&amount=3</pre>
+
+        <p>Now, both of these items will placed in the params hash. We can access the values with <code>params["feed"]</code> and <code>params["amount"]</code>.</p>
+
+        <h2>Homework</h2>
+        <p>Estimated time: < 30 min</p>
+        <p>For next week we'll push our app to the hosting site, Heroku. We'll be using a system called Git to share and keep track of our code. Follow along with this video to get a feel for Git before you come to class.</p>
+
+        <p>You'll need to either create a new app called "git_practice" or use one of your existing apps.</p>
+
+        <p><a href="https://vimeo.com/groups/242410/videos/92062990">https://vimeo.com/groups/242410/videos/92062990</a></p>
+
+        <p>These commands configure Git with a placeholder name and email. You don't need to use your actual name or email, if you don't want to.  You only need to do this once on your computer.</p>
+
+        <pre class="prettyprint">
+git config --global user.name "John Doe"</pre>
+
+        <pre class="prettyprint">
+git config --global user.email johndoe@example.com</pre>
+
+        <hr>
+
+        <p>This command tells Git to start keeping track of your project. You only need to do this once per project.</p>
+
+        <pre class="prettyprint">
+git init</pre>
+
+        <hr>
+
+        <p>This command tells Git to add all new changes for the next commit</p>
+
+        <pre class="prettyprint">
+git add -A</pre>
+
+        <p>This command tells Git to save all the changes that were added. You have to add a message that describes your changes.</p>
+
+        <pre class="prettyprint">
+git commit -m "first commit"</pre>
+
+        <hr>
+
+        <p>To connect your local repo to Github, use the following command. Everything in brackets is a placeholder for your repo's information:</p>
+
+        <pre class="prettyprint">
+git remote add origin [https link to your Github repo]</pre>
+
+        <p>To push your repo for the first time, use:</p>
+
+        <pre class="prettyprint">
+git push -u origin master</pre>
+
+        <hr>
+
+        <p>To clone an existing repository from Github, find the HTTPS url on the bottom right side of the Github repo and paste it in to terminal with the following command:</p>
+
+        <pre class="prettyprint">
+git clone [url of the Github repo]</pre>
+
+
+        <pre class="prettyprint">
+git clone "https://github.com/arjunvenkat/git_practice.git"</pre>
+
+        <p>This should save the repo from Github to your local folder.</p>
+
+        <p>To access the app, start from the folder where you typed the clone command and type in:</p>
+
+        <pre class="prettyprint">
+cd [folder name of the cloned app]</pre>
+
+        <p>for example, it might look like:</p>
+
+        <pre class="prettyprint">
+cd git_practice</pre>
+
+        <p>then bundle the app in case your Rails environment isn't up to date:</p>
+
+        <pre class="prettyprint">
+bundle install</pre>
+
+        <p>If you still have problems running the server after 'bundle install', try:</p>
+
+        <pre class="prettyprint">
+bundle update</pre>
+
+        <hr>
+
+        <p>Every time you want to save and push your changes, use the following three commands:</p>
+
+
+        <pre class="prettyprint">
+git add -A</pre>
+
+        <pre class="prettyprint">
+git commit -m "a message describing any changes"</pre>
+
+        <pre class="prettyprint">
+git push</pre>
+
+        <p>If you accidentally forgot to add a commit message, you might find yourself in a weird looking editor that you can't get out of.  This editor is called Vim, and you can Google commands to navigate inside here.  If you want a quick way to save and exit the file, type in:</p>
+
+        <pre class="prettyprint">
+:wq</pre>
+
+        <hr>
+
+        <p>If you want to move forwards and backwards in an application's history, use the <strongs>git checkout</strong> command. Find the full SHA of a commit from Github and paste it in with the following command:</p>
+
+        <pre class="prettyprint">
+git checkout [SHA for a particular commit]</pre>
+
+        <p>for example:</p>
+
+        <pre class="prettyprint">
+git checkout e318538471dfaa50398e3679c778014c59763002</pre>
+
+        <p>This will temporarily revert the application back to an earlier state. If there is a database error, you might need to use the command rake db:migrate to reset the database. /p>
+
+        <p>To go back to your application's current state, use:</p>
+
+        <pre class="prettyprint">
+git checkout master</pre>
+
+      </div>
+    </div>
+  </div>
+  <footer></footer>
+  <script>
+String.prototype.escapeHTML = function () {
+  return(
+    this.replace(/>/g,'&gt;').
+         replace(/</g,'&lt;').
+         replace(/"/g,'&quot;')
+  );
+};
+var elems = document.getElementsByTagName('pre');
+for (i=0; i<elems.length;i++) {
+  if (elems[i]) {
+    elems[i].innerHTML = elems[i].innerHTML.escapeHTML();
+  }
+}
+  </script>
+</body>
+</html>
