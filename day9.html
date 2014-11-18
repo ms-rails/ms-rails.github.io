@@ -1,0 +1,95 @@
+<html>
+<head>
+  <title></title>
+  <script src="http://code.jquery.com/jquery.min.js"></script>
+  <link href="http://maxcdn.bootstrapcdn.com/bootstrap/3.2.0/css/bootstrap.min.css" rel="stylesheet" type="text/css" />
+  <script src="http://maxcdn.bootstrapcdn.com/bootstrap/3.2.0/js/bootstrap.min.js"></script>
+  <script src="https://google-code-prettify.googlecode.com/svn/loader/run_prettify.js"></script>
+  <link rel="stylesheet" href="screens.css">
+</head>
+<body>
+  <div class="container">
+    <div class="row">
+      <div class="col-md-8 col-md-offset-2">
+        <h1>Day 9 <small><a href="index.html">back to index</a></small></h1>
+
+        <p>Today we used Git to store our apps on Github and host our apps on Heroku. You can find the code to store apps on Github from the Day 8 homework. The guide to push to Heroku is below.</p>
+
+        <h2>Pushing to Github</h2>
+        <iframe src="http://player.vimeo.com/video/112221565" width="700" height="440" frameborder="0" webkitallowfullscreen mozallowfullscreen allowfullscreen></iframe>
+
+        <h2>Pushing to Heroku</h2>
+        <iframe src="http://player.vimeo.com/video/112221330" width="700" height="440" frameborder="0" webkitallowfullscreen mozallowfullscreen allowfullscreen></iframe>
+
+        <p>First we need to make sure that Git is tracking our app. Check the notes from the last Day's homework if you forgot how to do this. Then, we need to change the gemfile so that we can support the Postgres database, which is what Heroku uses. Delete these lines from the gemfile (the regular one, not gemfile.lock):</p>
+
+        <pre class="prettyprint">
+# Use sqlite3 as the database for Active Record
+gem 'sqlite3'</pre>
+
+        <p>And add this chunk of code to the gemfile:</p>
+
+        <pre class="prettyprint">
+group :development do
+  # Use sqlite3 as the database for Active Record
+  gem 'sqlite3'
+end
+
+group :production do
+  gem 'pg'
+  gem 'rails_12factor'
+end</pre>
+
+        <p>This code separates the files we need into two groups: the development group(when we're working in Nitrous.io) and the production group(when we're working in Heroku)</p>
+
+        <p>Now, we need to save the Gemfile and update it by running:</p>
+
+        <pre class="prettyprint">
+bundle install</pre>
+
+        <p>Let's save all of these changes using Git:</p>
+
+        <pre class="prettyprint">
+git add -A
+git commit -m "some message"</pre>
+
+        <p>Congrats! Your app is ready to get pushed to Heroku. We need to first set up a project in Heroku, though. Make sure you have Heroku account at <a href="https://www.heroku.com/">https://www.heroku.com/</a> and then enter the following line in your app's folder:</p>
+
+        <pre class="prettyprint">
+heroku create</pre>
+
+        <p>This creates a project for your app on Heroku. When you hit enter, you'll see a weird looking domain name like http://shuttering-waves-1438.com. This is the live domain for your web app. Anyone in the world can go to this link 24/7. You don't have to worry about always keeping your server on anymore! Check out the domain, and you'll see a feedback page welcoming you to the app.</p>
+
+        <p>We want to replace this page with our app code.</p>
+
+        <p>We can push to Heroku by using:</p>
+
+        <pre class="prettyprint">
+git push heroku master</pre>
+
+
+
+        <p>When we created the project on Heroku, we got a new git remote that we can push to, called Heroku. The push usually takes awhile, so just hang out and take a break while everything gets pushed up. After a few minutes, check your domain again and your app should be up!</p>
+
+
+      </div>
+    </div>
+  </div>
+  <footer></footer>
+  <script>
+String.prototype.escapeHTML = function () {
+  return(
+    this.replace(/>/g,'&gt;').
+         replace(/</g,'&lt;').
+         replace(/"/g,'&quot;')
+  );
+};
+var elems = document.getElementsByTagName('pre');
+for (i=0; i<elems.length;i++) {
+  if (elems[i]) {
+    elems[i].innerHTML = elems[i].innerHTML.escapeHTML();
+  }
+}
+  </script>
+</body>
+</html>
