@@ -1,0 +1,150 @@
+<html>
+<head>
+  <title></title>
+  <script src="http://code.jquery.com/jquery.min.js"></script>
+  <link href="http://maxcdn.bootstrapcdn.com/bootstrap/3.2.0/css/bootstrap.min.css" rel="stylesheet" type="text/css" />
+  <script src="http://maxcdn.bootstrapcdn.com/bootstrap/3.2.0/js/bootstrap.min.js"></script>
+  <script src="https://google-code-prettify.googlecode.com/svn/loader/run_prettify.js"></script>
+  <link rel="stylesheet" href="screens.css">
+</head>
+<body>
+  <div class="container">
+    <div class="row">
+      <div class="col-md-8 col-md-offset-2">
+        <h1>Day 9 <small><a href="index.html">back to index</a></small></h1>
+
+        <p>Today we set up a database in Rails and used Rails console to create daabase objects. We also accessed those objects using our Rails app. The videos below go through a slightly different process than what we covered in class, but they still cover all major ideas.</p>
+
+        <h2>Creating a database and generating models</h2>
+        <iframe src="http://player.vimeo.com/video/117507256" width="700" height="440" frameborder="0" webkitallowfullscreen mozallowfullscreen allowfullscreen></iframe>
+
+        <p>The easiest way to create a database in Rails is to use a model generator. The general syntax looks like this:</p>
+
+        <pre class="prettyprint">
+rails generate model [ModelName] [column1:datatype] [column2:datatype] [column3:datatype]</pre>
+
+        <p>You'll always type <code>rails generate model</code> along with some model name. Then you'll add as many columns as you need to store the right data in your database. Here's a specific example you can type into terminal:</p>
+
+        <pre class="prettyprint">
+rails generate model Gif caption:string image_url:string</pre>
+
+        <p>After typing the command, hit enter. You'll see some files get created. Run the migration file to set up the database by using:</p>
+
+        <pre class="prettyprint">
+rake db:migrate</pre>
+
+        <p>That's it! Your database is now set up and ready for new data.</p>
+
+
+        <h2>Adding items through Rails console</h2>
+        <iframe src="http://player.vimeo.com/video/117517873" width="700" height="440" frameborder="0" webkitallowfullscreen mozallowfullscreen allowfullscreen></iframe>
+
+        <p>You can open up console in your app's folder by using:</p>
+
+        <pre class="prettyprint">
+rails console</pre>
+
+        <p>You can check to see if there are any rows in a database table by using:</p>
+
+        <pre class="prettyprint">
+[ModelName].all</pre>
+
+        <p>Or for a specific example:</p>
+
+        <pre class="prettyprint">
+Gif.all</pre>
+
+        <p>Create a new object with the following general syntax:</p>
+
+        <pre class="prettyprint">
+[some_variable] = [ModelName].new</pre>
+
+        <p>Or for a specific example:</p>
+
+        <pre class="prettyprint">
+g = Gif.new</pre>
+
+        <p>Fill up columns in the above database row by using the following general syntax:</p>
+
+        <pre class="prettyprint">
+[some_variable].[column_name] = [some_value]</pre>
+
+        <p>or for a specific example:</p>
+
+        <pre class="prettyprint">
+g.caption = "swag"</pre>
+
+        <p>Once you've filled up all the columns for a particular database object, you can save it with:</p>
+
+        <pre class="prettyprint">
+[some_variable].save</pre>
+
+        <p>or for a specific example:</p>
+
+        <pre class="prettyprint">
+g.save</pre>
+
+        <h2>Accessing database items in your Rails app</h2>
+
+        <p>We can access a databse item by it's ID in console using:</p>
+
+        <pre class="prettyprint">
+[ModelName].find([item_id])</pre>
+
+        <p>Or more specifically</p>
+
+        <pre class="prettyprint">
+Gif.find(2)</pre>
+
+        <p>We can use the same syntax inside of a controller action:</p>
+
+        <pre class="prettyprint">
+[some_instance_variable] = [ModelName].find([item_id])</pre>
+
+        <p>In the video, we accessed items in the 'show' action with the specific syntax of:</p>
+
+        <pre class="prettyprint">
+@gif = Gif.find(params['id'])</pre>
+
+        <p>We used <code>params['id']</code> since we didn't know the specific object we needed to access yet. We don't want to hardcode that ID or we would see the same gif over and over again on the show page even if we type different numbers into the address bar.</p>
+
+        <p>Now you can just access attributes of the database object in the view page with:</p>
+
+        <pre class="prettyprint">
+[some_instance_variable].[column_name]</pre>
+
+        <p>Or more specifcally:</p>
+
+        <pre class="prettyprint">
+@gif.image_url</pre>
+
+        <p>will return a string with the gif's image url. That's it!</p>
+
+        <h2>Homework</h2>
+
+        <p>1. Review the videos to enter a few more "favorites" into your database from class</p>
+        <p>2. Create a new app or use an existing app. Create a database for some information you want to save in your app. Enter a few items into your database.</p>
+
+        <p>We'll practice this material more next class.</p>
+
+      </div>
+    </div>
+  </div>
+  <footer></footer>
+  <script>
+String.prototype.escapeHTML = function () {
+  return(
+    this.replace(/>/g,'&gt;').
+         replace(/</g,'&lt;').
+         replace(/"/g,'&quot;')
+  );
+};
+var elems = document.getElementsByTagName('pre');
+for (i=0; i<elems.length;i++) {
+  if (elems[i]) {
+    elems[i].innerHTML = elems[i].innerHTML.escapeHTML();
+  }
+}
+  </script>
+</body>
+</html>
