@@ -1,0 +1,87 @@
+<html>
+<head>
+  <title></title>
+  <script src="http://code.jquery.com/jquery.min.js"></script>
+  <link href="http://maxcdn.bootstrapcdn.com/bootstrap/3.2.0/css/bootstrap.min.css" rel="stylesheet" type="text/css" />
+  <script src="http://maxcdn.bootstrapcdn.com/bootstrap/3.2.0/js/bootstrap.min.js"></script>
+  <script src="https://google-code-prettify.googlecode.com/svn/loader/run_prettify.js"></script>
+  <link rel="stylesheet" href="screens.css">
+</head>
+<body>
+  <div class="container">
+    <div class="row">
+      <div class="col-md-8 col-md-offset-2">
+        <h1>Day 10 <small><a href="index.html">back to index</a></small></h1>
+
+        <p>Today we learned how to use forms to create new objects inside a Rails database.</p>
+
+        <h2>Why are forms important?</h2>
+        <iframe src="http://player.vimeo.com/video/118073680" width="700" height="440" frameborder="0" webkitallowfullscreen mozallowfullscreen allowfullscreen></iframe>
+
+        <h2>Creating database items with forms</h2>
+        <iframe src="http://player.vimeo.com/video/118073690" width="700" height="440" frameborder="0" webkitallowfullscreen mozallowfullscreen allowfullscreen></iframe>
+
+        <p>First we need to create an RCAV that displays a new form:</p>
+
+        <p>The route:</p>
+        <pre class="prettyprint">
+get "/new_gif" => "application#new"</pre>
+
+        <p>The action</p>
+        <pre class="prettyprint">
+def new
+end</pre>
+
+        <p>The view - new.html.erb</p>
+        <pre class="prettyprint">
+<form action="/create_gif">
+  <input type="text" name="caption" placeholder="caption">
+  <input type="text" name="url" placeholder="url">
+  <input type="submit">
+</form></pre>
+
+
+        <p>There are a few important pieces to look at. The <code>action="/create_gif"</code> attribute tells the form where it should got once the user hits submit. It's kind of like an 'href' attribute in a link. Also, the <code>name</code> attributes in each input element have to be there so things show up in the params hash later. Otherwise, users can type something in, hit submit, and nothing will show up for us later.</p>
+
+        <p>Once the user hits submit, the form has to go somewhere. But we'll get an error, since "/create_gif" isn't supported by our app yet. Let's fix that. We'll need to create a new RCAV</p>
+
+        <p>The route:</p>
+        <pre class="prettyprint">
+get "/create_gif" => "application#create"</pre>
+
+        <p>The action:</p>
+        <pre class="prettyprint">
+g = Gif.new
+g.caption = params['caption']
+g.url = params['url']
+g.save
+
+redirect_to "/gifs/#{g.id}"</pre>
+
+        <p>This code is exactly like what we used in console to save individual items. The only difference is the redirect_to method. This method is used to send the request to a different url instead of rendering a page. We make the url dynamic by pulling the id from the Gif object that we just saved. We can do this inside of the string by using the <code>#{ }</code> tags.</p>
+
+        <h2>Homework</h2>
+
+        <p>Create a new app that uses forms to save the names of your friends. If you're feeling ambitious, save some other interesting information about them.</p>
+
+      </div>
+    </div>
+  </div>
+  <footer></footer>
+  <script>
+String.prototype.escapeHTML = function () {
+  return(
+    this.replace(/>/g,'&gt;').
+         replace(/</g,'&lt;').
+         replace(/"/g,'&quot;')
+  );
+};
+var elems = document.getElementsByTagName('pre');
+for (i=0; i<elems.length;i++) {
+  if (elems[i]) {
+    elems[i].innerHTML = elems[i].innerHTML.escapeHTML();
+  }
+}
+  </script>
+</body>
+</html>
