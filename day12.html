@@ -1,0 +1,106 @@
+<html>
+<head>
+  <title></title>
+  <script src="http://code.jquery.com/jquery.min.js"></script>
+  <link href="http://maxcdn.bootstrapcdn.com/bootstrap/3.2.0/css/bootstrap.min.css" rel="stylesheet" type="text/css" />
+  <script src="http://maxcdn.bootstrapcdn.com/bootstrap/3.2.0/js/bootstrap.min.js"></script>
+  <script src="https://google-code-prettify.googlecode.com/svn/loader/run_prettify.js"></script>
+  <link rel="stylesheet" href="screens.css">
+</head>
+<body>
+  <div class="container">
+    <div class="row">
+      <div class="col-md-8 col-md-offset-2">
+        <h1>Day 12 <small><a href="index.html">back to index</a></small></h1>
+
+        <p>Today we learned how to use forms to edit existing objects inside a Rails database.</p>
+
+        <h3>Editing database items with forms</h3>
+        <iframe src="http://player.vimeo.com/video/119014487" width="700" height="440" frameborder="0" webkitallowfullscreen mozallowfullscreen allowfullscreen></iframe>
+
+        <p>This process works similarly to the create forms - we need one action to show the form and another one to process the form</p>
+
+        <h4>Showing the form:</h4>
+
+        <p>The route:</p>
+        <pre class="prettyprint">
+get "/gifs/:id/edit" => "application#edit"</pre>
+
+        <p>The action:</p>
+        <pre class="prettyprint">
+def edit
+  @gif = Gif.find(params['id'])
+end</pre>
+
+        <p>The view</p>
+        <pre class="prettyprint">
+<form action="/gifs/<%= @gif.id %>/update">
+  <div>
+    <label for="caption">Caption:</label>
+    <input type="text" id="caption" name="caption" value="<%= @gif.caption %>">
+  </div>
+  <div>
+    <label for="url">Url:</label>
+    <input type="text" id="url" name="url" value="<%= @gif.url %>">
+  </div>
+  <input type="submit">
+</form></pre>
+
+      <h4>Processing the form:</h4>
+
+      <p>The route:</p>
+      <pre class="prettyprint">
+get "/gifs/:id/update" => "application#update"</pre>
+
+      <p>The action:</p>
+      <pre class="prettyprint">
+def update
+  @gif = Gif.find(params['id'])
+  @gif.caption = params['caption']
+  @gif.url = params['url']
+  @gif.save
+
+  redirect_to "/gifs/#{@gif.id}"
+end</pre>
+
+        <h2>Homework</h2>
+
+        <p>Watch this video on the delete action and integrate a delete link onto each item's show page.</p>
+
+        <h3>Creating database items with forms</h3>
+        <iframe src="http://player.vimeo.com/video/119014488" width="700" height="440" frameborder="0" webkitallowfullscreen mozallowfullscreen allowfullscreen></iframe>
+
+        <p>The route:</p>
+        <pre class="prettyprint">
+get "/gifs/:id/delete" => "application#destroy"</pre>
+
+        <p>The action</p>
+        <pre class="prettyprint">
+def destroy
+  g = Gif.find(params['id'])
+  g.destroy
+
+  redirect_to "/new_gif"
+end</pre>
+
+      </div>
+    </div>
+  </div>
+  <footer></footer>
+  <script>
+String.prototype.escapeHTML = function () {
+  return(
+    this.replace(/>/g,'&gt;').
+         replace(/</g,'&lt;').
+         replace(/"/g,'&quot;')
+  );
+};
+var elems = document.getElementsByTagName('pre');
+for (i=0; i<elems.length;i++) {
+  if (elems[i]) {
+    elems[i].innerHTML = elems[i].innerHTML.escapeHTML();
+  }
+}
+  </script>
+</body>
+</html>
