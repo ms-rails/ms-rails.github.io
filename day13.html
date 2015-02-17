@@ -1,0 +1,74 @@
+<html>
+<head>
+  <title></title>
+  <script src="http://code.jquery.com/jquery.min.js"></script>
+  <link href="http://maxcdn.bootstrapcdn.com/bootstrap/3.2.0/css/bootstrap.min.css" rel="stylesheet" type="text/css" />
+  <script src="http://maxcdn.bootstrapcdn.com/bootstrap/3.2.0/js/bootstrap.min.js"></script>
+  <script src="https://google-code-prettify.googlecode.com/svn/loader/run_prettify.js"></script>
+  <link rel="stylesheet" href="screens.css">
+</head>
+<body>
+  <div class="container">
+    <div class="row">
+      <div class="col-md-8 col-md-offset-2">
+        <h1>Day 13 <small><a href="index.html">back to index</a></small></h1>
+
+        <p>Today we learned how to create an index page that displays all the items from a database table.</p>
+
+        <h3>Working with arrays </h3>
+        <iframe src="http://player.vimeo.com/video/119361051" width="700" height="440" frameborder="0" webkitallowfullscreen mozallowfullscreen allowfullscreen></iframe>
+
+        <iframe src="http://player.vimeo.com/video/119361052" width="700" height="440" frameborder="0" webkitallowfullscreen mozallowfullscreen allowfullscreen></iframe>
+
+        <p>An array is a list that looks like this:</p>
+
+        <pre class="prettyprint">
+stuff = [3, "hello", 4.8, false, 89]
+end</pre>
+        <p>We can store lot's of different things inside an array.</p>
+
+        <p>We pull out items by their poistion in the array. We have to subtract by one, though. For example, if we want to pull out "hello" from the above array, we would use:</p>
+
+        <pre class="prettyprint">
+stuff[1]</pre>
+
+        <iframe src="http://player.vimeo.com/video/119361055" width="700" height="440" frameborder="0" webkitallowfullscreen mozallowfullscreen allowfullscreen></iframe>
+
+        <p>We can loop through arrays with the <code>each</code> method:</p>
+
+        <pre class="prettyprint">
+colors = ['red', 'yellow', 'blue']
+
+colors.each do |color|
+  puts "#{color} is a primary color"
+end</pre>
+
+        <p>The code between the <code>do</code> and the <code>end</code> gets run for each item in the list. The variable between the two <code>| |</code> is a placeholder for each list item. So, the first time the loop is run, <code>color</code> stands for 'red', the second time <code>color</code> stands for 'yellow' and the third time, <code>color</code> stands for 'blue.</p>
+
+        <h3>Creating an index view</h3>
+        <iframe src="http://player.vimeo.com/video/119361058" width="700" height="440" frameborder="0" webkitallowfullscreen mozallowfullscreen allowfullscreen></iframe>
+
+        <p>The index view uses the each loop, but we need to make sure we wrap each line <code><% %></code> tags. Notice that there's no equal sign on the first or last line of the loop. That's because those lines are just Ruby code that we want to run - we don't want those lines to show up in the HTML.</p>
+
+
+      </div>
+    </div>
+  </div>
+  <footer></footer>
+  <script>
+String.prototype.escapeHTML = function () {
+  return(
+    this.replace(/>/g,'&gt;').
+         replace(/</g,'&lt;').
+         replace(/"/g,'&quot;')
+  );
+};
+var elems = document.getElementsByTagName('pre');
+for (i=0; i<elems.length;i++) {
+  if (elems[i]) {
+    elems[i].innerHTML = elems[i].innerHTML.escapeHTML();
+  }
+}
+  </script>
+</body>
+</html>
