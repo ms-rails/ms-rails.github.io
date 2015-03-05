@@ -1,0 +1,71 @@
+<html>
+<head>
+  <title></title>
+  <script src="http://code.jquery.com/jquery.min.js"></script>
+  <link href="http://maxcdn.bootstrapcdn.com/bootstrap/3.2.0/css/bootstrap.min.css" rel="stylesheet" type="text/css" />
+  <script src="http://maxcdn.bootstrapcdn.com/bootstrap/3.2.0/js/bootstrap.min.js"></script>
+  <script src="https://google-code-prettify.googlecode.com/svn/loader/run_prettify.js"></script>
+  <link rel="stylesheet" href="screens.css">
+</head>
+<body>
+  <div class="container">
+    <div class="row">
+      <div class="col-md-8 col-md-offset-2">
+        <h1>Day 15 <small><a href="index.html">back to index</a></small></h1>
+
+        <p>Today we learned how to use the rails starter generators command to automatically generate resources.</p>
+
+        <h3>Building up to starter generators </h3>
+        <iframe src="http://player.vimeo.com/video/119361060" width="700" height="440" frameborder="0" webkitallowfullscreen mozallowfullscreen allowfullscreen></iframe>
+
+        <iframe src="http://player.vimeo.com/video/119370139" width="700" height="440" frameborder="0" webkitallowfullscreen mozallowfullscreen allowfullscreen></iframe>
+
+       <h3>Using starter generators</h3>
+
+       <iframe src="http://player.vimeo.com/video/119370140" width="700" height="440" frameborder="0" webkitallowfullscreen mozallowfullscreen allowfullscreen></iframe>
+
+       <p>To use the starter generators command, we'll first need to add the gem to our gemfile. Open up the file called `Gemfile` and paste in this line anywhere on the page.</p>
+
+       <pre class="prettyprint">
+gem 'starter_generators', :git => 'git://github.com/arjunvenkat/starter_generators'</pre>
+
+       <p>Then, in your app folder in terminal, type in the command: </p>
+
+        <pre class="prettyprint">
+bundle install</pre>
+
+        <p>This loads the gem into your app.</p>
+
+        <p>We can use starter generators with this general syntax:</p>
+
+        <pre class="prettyprint">
+rails generate starter:basic [model_name] [column_name]:[column_data_type]</pre>
+
+        <p>It works just like the model generator we learned about earlier. Here's a concrete example:</p>
+
+        <pre class="prettyprint">
+rails generate starter:basic Fruit name:string rating:integer</pre>
+
+        <p>This one line creates all the routes, controllers and views you need to CRUD out a whole resource!</p>
+
+      </div>
+    </div>
+  </div>
+  <footer></footer>
+  <script>
+String.prototype.escapeHTML = function () {
+  return(
+    this.replace(/>/g,'&gt;').
+         replace(/</g,'&lt;').
+         replace(/"/g,'&quot;')
+  );
+};
+var elems = document.getElementsByTagName('pre');
+for (i=0; i<elems.length;i++) {
+  if (elems[i]) {
+    elems[i].innerHTML = elems[i].innerHTML.escapeHTML();
+  }
+}
+  </script>
+</body>
+</html>
